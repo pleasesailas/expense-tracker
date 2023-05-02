@@ -1,20 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
+const Category = require('../../models/category')
+const record = require('../../models/record')
 
 
-router.get('/', (req, res) => {
-  // res.render('index')
-  Record.find()
-    .lean()
-    .then((record) => res.render('index', { record }))
-    .catch(err => console.log(err))
-}) 
+router.get('/', async (req, res) => {
+  try {
+    let totalAmount = 0
+    const categories = await Category.find().lean()
+    const records = await Record.find().populate('categoryId').lean().sort({ date:'desc' })
 
-//create
-//read
-
-//update
-//delete
+    const finalRecords = records.map((record) => {
+      totalAmount += record.amount
+      record.date = record.date.toLocaleDateString('zu-Za')
+      return record
+    })
+    res.render('index', { finalRecords, categories, totalAmount })
+  } catch(err) {
+    console.log(err)
+  }
+})
 
 module.exports = router
