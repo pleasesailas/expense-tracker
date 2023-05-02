@@ -5,11 +5,11 @@
       <form action="/users/login" method="POST">
         <div class="mt-3">
           <label for="email" class="form-label" style="font-size: 1.5em;">Email</label>
-          <input type="text" name="email" class="form-control" id="email" placeholder="Enter your Email here">
+          <input type="text" name="email" class="form-control" id="email" placeholder="Enter your Email here" value="{{ email }}">
         </div>
         <div class="mt-3">
           <label for="password" class="form-label" style="font-size: 1.5em;">Password</label>
-          <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
+          <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" value="{{ password }}">
         </div>
         <button type="submit" class="btn btn-primary w-100 mt-4" style="font-size: 1.5em;">Login</button>
       </form>
