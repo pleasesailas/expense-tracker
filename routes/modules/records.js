@@ -8,9 +8,9 @@ const record = require('../../models/record')
 //create
 router.get('/new', async (req, res) => {
   try {
-    const categories = await Category.find().lean().sort({ _id:'asc' })
+    const categories = await Category.find().lean().sort({ _id: 'asc' })
     res.render('new', { categories })
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 })
@@ -20,7 +20,7 @@ router.post('/new', async (req, res) => {
     const referenceCategory = await Category.findOne({ name: data.category }).lean()
     await Record.create({ ...data, categoryId: referenceCategory._id })
     res.redirect('/')
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 })
@@ -32,13 +32,13 @@ router.get('/:id/edit', async (req, res) => {
     const categories = await Category.find().lean()
     const record = await Record.findById(id).lean()
     record.date = record.date.toLocaleDateString('zu-Za')
-    res.render('edit', { record, categories })    
-  } catch(err) {
+    res.render('edit', { record, categories })
+  } catch (err) {
     console.log(err)
   }
 })
 
-router.post('/:id/edit', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params
     const data = req.body
@@ -46,17 +46,17 @@ router.post('/:id/edit', async (req, res) => {
     const update = { ...data, categoryId: referenceCategory._id }
     await Record.findByIdAndUpdate(id, update)
     res.redirect('/')
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 })
 //delete
-router.post('/:id/delete', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params
     await Record.findByIdAndDelete(id)
     res.redirect('/')
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 })

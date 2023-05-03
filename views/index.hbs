@@ -9,7 +9,8 @@
           <option value="3">Three</option>
         </select>
         <div class="mt-3 ms-1" style="font-size:24px;">總金額：</div>
-        <div class="d-flex justify-content-center mb-3" style="font-size: 70px; color:rgb(255, 115, 0)"> {{ totalAmount }} </div>
+        <div class="d-flex justify-content-center mb-3" style="font-size: 70px; color:rgb(255, 115, 0)"> {{ totalAmount
+          }} </div>
         <table class="table table-hover table-striped">
           <thead class="table-dark">
             <tr>
@@ -30,7 +31,7 @@
               <td>{{ this.amount }}</td>
               <td><a href="/records/{{ this._id }}/edit" class="btn btn-outline-success">Edit</a></td>
               <td>
-                <form action="/records/{{ this._id}}/delete" method="POST">
+                <form action="/records/{{ this._id}}?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-outline-danger" style="width: 78%;">Delete</button>
                 </form>
               </td>
@@ -39,9 +40,10 @@
           </tbody>
         </table>
         <div class="d-flex justify-content-center mt-3">
-          <a href="/records/new" class="btn mt-3 w-50" style="font-size: 1.2em;background-color:rgb(255, 132, 0); color:white">新增支出</a>
+          <a href="/records/new" class="btn mt-3 w-50"
+            style="font-size: 1.2em;background-color:rgb(255, 132, 0); color:white">新增支出</a>
         </div>
-        
+
       </div>
     </div>
   </div>
