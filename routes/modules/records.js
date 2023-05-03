@@ -3,6 +3,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 const category = require('../../models/category')
+const record = require('../../models/record')
 
 //create
 router.get('/new', async (req, res) => {
@@ -16,18 +17,48 @@ router.get('/new', async (req, res) => {
 router.post('/new', async (req, res) => {
   try {
     const data = req.body
-    const categories = await Category.find().lean()
-    const referenceCategory = categories.find(category => category.name === data.category)
-    data.categoryId = referenceCategory._id
-    await Record.create(data)
+    const referenceCategory = await Category.findOne({ name: data.category }).lean()
+    await Record.create({ ...data, categoryId: referenceCategory._id })
     res.redirect('/')
   } catch(err) {
     console.log(err)
   }
 })
-//read
 
 //update
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const { id } = req.params
+    const categories = await Category.find().lean()
+    const record = await Record.findById(id).lean()
+    record.date = record.date.toLocaleDateString('zu-Za')
+    res.render('edit', { record, categories })    
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+router.post('/:id/edit', async (req, res) => {
+  try {
+    const { id } = req.params
+    const data = req.body
+    const referenceCategory = await Category.findOne({ name: data.category }).lean()
+    const update = { ...data, categoryId: referenceCategory._id }
+    await Record.findByIdAndUpdate(id, update)
+    res.redirect('/')
+  } catch(err) {
+    console.log(err)
+  }
+})
 //delete
+router.post('/:id/delete', async (req, res) => {
+  try {
+    const { id } = req.params
+    await Record.findByIdAndDelete(id)
+    res.redirect('/')
+  } catch(err) {
+    console.log(err)
+  }
+})
 
 module.exports = router
