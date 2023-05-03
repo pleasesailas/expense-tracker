@@ -7,10 +7,11 @@ const port = 3000
 
 //mongoose
 require('./config/mongoose')
-
 //view
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+//public
+// app.use(express.static('public'))
 //body-parser
 app.use(express.urlencoded({ extended: true }))
 //routes
