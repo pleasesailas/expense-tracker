@@ -28,6 +28,12 @@ app.use(session({
 // app.use(express.static('public'))
 //body-parser
 app.use(express.urlencoded({ extended: true }))
+//isAuthenticated middleware
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 //routes
 app.use(routes)
 
