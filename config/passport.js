@@ -31,7 +31,6 @@ module.exports = (app) => {
     callbackURL: process.env.FACEBOOK_CALLBACK
   }, async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log(profile)
         const { name, email } = profile._json
         const user = await User.findOne({ email })
         if (user) { return done(null, user) }
