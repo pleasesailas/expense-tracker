@@ -18,7 +18,7 @@ router.post('/new', async (req, res) => {
     const data = req.body
     const referenceCategory = await Category.findOne({ name: data.category }).lean()
     // 如果referenceCategory 沒找到回傳 null 避免回傳defined產生bug
-    const categoryId = referenceCategory ? referenceCategory._id : null
+    const categoryId = referenceCategory ? referenceCategory._id : null 
     await Record.create({ ...data, userId, categoryId })
     res.redirect('/')
   } catch (err) {

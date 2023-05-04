@@ -29,7 +29,6 @@ db.once('open', async () => {
           email: user.email,
           password: hash
         })
-        console.log(`${createdUser} created!`)
 
         // 處理 records 與users 的關係
         const userRecords = user.recordsList.map(index => {
@@ -42,7 +41,6 @@ db.once('open', async () => {
             //找到第一筆data.name 與record.category 完全相同並用return 返回資訊記錄在referenceCategory
             return data.name === record.category
           })
-          //紀錄 categoryId 並回傳
           record.categoryId = referenceCategory._id
           return record
         })

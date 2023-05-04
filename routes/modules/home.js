@@ -26,13 +26,11 @@ router.get('/', async (req, res) => {
 router.get('/filter', async (req, res) => {
   try {
     const userId = req.user._id
-    //console.log(req.query.filterSelect)  e.q. query: { filterSelect: '交通出行' },
     const selectCategoryName = req.query.filterSelect
     let totalAmount = 0
     const categories = await Category.find().lean().sort({ _id: 'asc' })
     const selectCategory = await Category.findOne({ name: selectCategoryName })
     const categoryId = selectCategory ? selectCategory._id : null
-    //
     const records = await Record.find({ categoryId, userId }).populate('categoryId').lean().sort({ date: 'desc' })
     const finalRecords = await records.map((record) => {
       totalAmount += record.amount

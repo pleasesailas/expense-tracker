@@ -8,14 +8,12 @@ const routes = require('./routes')
 
 const app = express()
 
-
 //mongoose
 require('./config/mongoose')
 const port = process.env.PORT
 //view
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
-
 //method-override
 app.use(methodOverride('_method'))
 //body-parser
@@ -26,10 +24,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
-//public
-// app.use(express.static('public'))
-
-
 //passport
 usePassport(app)
 //flash
@@ -45,7 +39,7 @@ app.use((req, res, next) => {
 })
 //routes
 app.use(routes)
-
+//listening
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
 })
