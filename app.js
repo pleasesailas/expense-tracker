@@ -14,10 +14,11 @@ const port = process.env.PORT
 //view
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
-//passport
-usePassport(app)
+
 //method-override
 app.use(methodOverride('_method'))
+//body-parser
+app.use(express.urlencoded({ extended: true }))
 //session
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -26,8 +27,10 @@ app.use(session({
 }))
 //public
 // app.use(express.static('public'))
-//body-parser
-app.use(express.urlencoded({ extended: true }))
+
+
+//passport
+usePassport(app)
 //isAuthenticated middleware
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()

@@ -14,8 +14,13 @@
 <body>
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid d-flex justify-content-between">
-      <a href="/" class="navbar-brand btn ms-2" style="font-size:1.3em;">家庭記帳本</a>
+      <a href="/" class="navbar-brand btn ms-2" style="font-size:1.3em;">
+      {{#if isAuthenticated}} {{ user.name }}'s {{/if}}家庭記帳本</a>
+      {{#if isAuthenticated}}
+      <a href="/users/logout" class="btn btn-outline-dark me-2">Logout</a>
+      {{else}}
       <a href="/users/login" class="btn btn-outline-dark me-2">Login</a>
+      {{/if}}
     </div>
   </nav>
 
