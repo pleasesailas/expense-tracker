@@ -1,10 +1,11 @@
-# 我的餐廳清單
+# 家庭私帳本
 
 運用 Node.js + Express 製作的家庭記帳本。
 
 
-![image](https://github.com/pleasesailas/Restaurant-List-v3/blob/main/public/readmeImage/index1.png)
-![image](https://github.com/pleasesailas/Restaurant-List-v3/blob/main/public/readmeImage/index2.png)
+![image](https://github.com/pleasesailas/expense-tracker/blob/main/public/readmeImage/img1.png)
+![image](https://github.com/pleasesailas/expense-tracker/blob/main/public/readmeImage/img2.png)
+![image](https://github.com/pleasesailas/expense-tracker/blob/main/public/readmeImage/img3.png)
 
 ## 特色功能
 
