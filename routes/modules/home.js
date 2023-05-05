@@ -37,7 +37,6 @@ router.get('/filter', async (req, res) => {
       record.date = record.date.toLocaleDateString('zu-Za')
       return record
     })
-    console.log(finalRecords)
     res.render('index', { finalRecords, categories, totalAmount })
   } catch (error) {
     console.log(error)
